@@ -16,5 +16,4 @@ public interface VolunteerRepo extends JpaRepository<Volunteer, Integer> {
     //find volunteer by phone number
     Volunteer findByPhoneNumber(String phoneNumber);
 
-
 }

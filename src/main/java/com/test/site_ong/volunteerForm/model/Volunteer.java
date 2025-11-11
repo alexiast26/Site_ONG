@@ -1,40 +1,54 @@
 package com.test.site_ong.volunteerForm.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "volunteers")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Volunteer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(nullable = false)
-    private String first_name;
+    @NotBlank(message = "First name is required")
+    @Size(min = 2, message = "First name should have at least 2 characters")
+    @Column(name = "first_name", nullable = false)
+    private String firstName;
 
-    @Column(nullable = false)
-    private String last_name;
+    @NotBlank(message = "Last name is required")
+    @Size(min = 2, message = "Last name should have at least 2 characters")
+    @Column(name = "last_name", nullable = false)
+    private String lastName;
 
-    @Column(nullable = false)
-    private String age;
+    //to be discussed on the exact minimum and maximum age, 14 and 110 are just placeholders for now
+    @NotBlank(message = "Age is required")
+    @Min(value = 14, message = "Volunteer must be at least 14 years old")
+    @Max(value = 110, message = "Invalid age, please enter a valid one")
+    @Column(name = "age", nullable = false)
+    private Integer age;
 
-    @Column(nullable = false, unique = true)
+    @NotBlank(message = "Email is required")
+    @Email(message = "Please provide a valid email address")
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false, unique = true)
-    private String phone_number;
+    @NotBlank(message = "Phone number is required")
+    @Size(max = 16, message = "Phone number shouldn't exceed 16 characters")
+    @Column(name = "phoneNumber", nullable = false, unique = true)
+    private String phoneNumber;
 
-    @Column(nullable = false)
-    private String desccription;
+    @NotBlank(message = "Description is required")
+    @Size(max = 400)
+    @Column(name = "description", nullable = false)
+    private String description;
 
-    public Volunteer(String age, int id, String first_name, String last_name, String email, String phone_number, String desccription) {
-        this.age = age;
-        this.id = id;
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.email = email;
-        this.phone_number = phone_number;
-        this.desccription = desccription;
+
+    public String getFullName() {
+        return firstName + " " + lastName;
     }
 
     public int getId() {
@@ -45,27 +59,27 @@ public class Volunteer {
         this.id = id;
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getLast_name() {
-        return last_name;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public String getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(String age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 
@@ -77,19 +91,22 @@ public class Volunteer {
         this.email = email;
     }
 
-    public String getPhone_number() {
-        return phone_number;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPhone_number(String phone_number) {
-        this.phone_number = phone_number;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
-    public String getDesccription() {
-        return desccription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesccription(String desccription) {
-        this.desccription = desccription;
+    public void setDescription(String description) {
+        this.description = description;
     }
+
+    //a status could be added, to be discussed
+
 }
