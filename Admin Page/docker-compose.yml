@@ -1,0 +1,21 @@
+
+services:
+  backend:
+    build:
+      context: "./Admin Page/adminpanel"   # ghilimele pentru spațiu
+    container_name: adminpage-backend
+    ports:
+      - "8080:8080"
+    environment:
+      DB_URL: "jdbc:postgresql://ep-calm-math-agth7iq2-pooler.c-2.eu-central-1.aws.neon.tech/data_management?sslmode=require&channel_binding=require"
+      DB_USER: "neondb_owner"
+      DB_PASSWORD: "npg_i2U9PjJAzdMX"
+
+  frontend:
+    build:
+      context: "./Admin Page/frontend"    # ghilimele pentru spațiu
+    container_name: adminpage-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
