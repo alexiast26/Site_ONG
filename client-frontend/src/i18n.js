@@ -1,0 +1,214 @@
+import i18n from 'i18next';
+import { initReactI18next } from 'react-i18next';
+
+const resources = {
+  ro: {
+    translation: {
+      // Navigation
+      nav: {
+        home: "Acasă",
+        about: "Despre Noi",
+        articles: "Articole",
+        projects: "Proiecte",
+        upcomingProjects: "Proiecte Viitoare",
+        completedProjects: "Proiecte Finalizate",
+        achievements: "Realizări",
+        volunteer: "Voluntariat",
+        donate: "Donează"
+      },
+      // Home Page
+      home: {
+        hero: {
+          title: "Acces spre Succes",
+          subtitle: "Dezvoltarea și educația copiilor - Construim împreună viitorul!",
+          cta: "Devino Voluntar",
+          donateBtn: "Donează Acum"
+        },
+        about: {
+          title: "Despre Noi",
+          description: "Acces spre Succes este o organizație non-profit dedicată dezvoltării și educației copiilor din România. Misiunea noastră este de a oferi fiecărui copil șansa de a-și atinge potențialul maxim prin programe educaționale de calitate și suport constant.",
+          mission: "Misiunea Noastră",
+          missionText: "Creăm oportunități egale pentru toți copiii prin educație de calitate, mentorare și suport emoțional.",
+          vision: "Viziunea Noastră",
+          visionText: "O Românie în care fiecare copil are acces la educație de calitate și șanse egale de succes."
+        },
+        board: {
+          title: "Echipa Noastră",
+          subtitle: "Membrii Consiliului de Administrație",
+          position: "Poziție"
+        },
+        volunteer: {
+          title: "Devino Voluntar",
+          subtitle: "Alătură-te echipei noastre și fă diferența!",
+          formTitle: "Formular de Înregistrare",
+          firstName: "Prenume",
+          lastName: "Nume",
+          email: "Email",
+          phone: "Telefon",
+          age: "Vârstă",
+          message: "Mesaj (opțional)",
+          messagePlaceholder: "Spune-ne de ce vrei să devii voluntar...",
+          submit: "Trimite Cererea",
+          success: "Mulțumim! Cererea ta a fost trimisă cu succes!",
+          error: "A apărut o eroare. Te rugăm să încerci din nou."
+        }
+      },
+      // Articles Page
+      articles: {
+        title: "Articole și Noutăți",
+        subtitle: "Ultimele știri și povești de la Acces spre Succes",
+        readMore: "Citește Mai Mult",
+        noArticles: "Nu există articole momentan."
+      },
+      // Projects Pages
+      projects: {
+        upcoming: {
+          title: "Proiecte Viitoare",
+          subtitle: "Proiectele noastre în curs de desfășurare și planificate",
+          noProjects: "Nu există proiecte viitoare momentan."
+        },
+        completed: {
+          title: "Proiecte Finalizate",
+          subtitle: "Proiectele pe care le-am finalizat cu succes",
+          noProjects: "Nu există proiecte finalizate momentan."
+        }
+      },
+      // Achievements Page
+      achievements: {
+        title: "Realizări",
+        comingSoon: "În Curând...",
+        description: "Pregătim ceva minunat! Revino curând pentru a vedea realizările noastre."
+      },
+      // Donate Page
+      donate: {
+        title: "Susține Cauza Noastră",
+        subtitle: "Donația ta face diferența în viața copiilor",
+        comingSoon: "Sistemul de donații va fi disponibil în curând!",
+        description: "Lucrăm la implementarea unui sistem sigur de donații online. În curând vei putea susține cauza noastră direct de pe site.",
+        alternative: "Alternative de Donație",
+        bank: "Transfer Bancar",
+        contact: "Pentru informații despre donații, contactează-ne la:",
+        email: "contact@accesspresucces.ro"
+      },
+      // Common
+      common: {
+        loading: "Se încarcă...",
+        error: "Eroare",
+        tryAgain: "Încearcă din nou",
+        close: "Închide",
+        learnMore: "Află Mai Multe"
+      }
+    }
+  },
+  en: {
+    translation: {
+      // Navigation
+      nav: {
+        home: "Home",
+        about: "About Us",
+        articles: "Articles",
+        projects: "Projects",
+        upcomingProjects: "Upcoming Projects",
+        completedProjects: "Completed Projects",
+        achievements: "Achievements",
+        volunteer: "Volunteer",
+        donate: "Donate"
+      },
+      // Home Page
+      home: {
+        hero: {
+          title: "Access to Success",
+          subtitle: "Child Development and Education - Building the Future Together!",
+          cta: "Become a Volunteer",
+          donateBtn: "Donate Now"
+        },
+        about: {
+          title: "About Us",
+          description: "Access to Success is a non-profit organization dedicated to the development and education of children in Romania. Our mission is to give every child the chance to reach their full potential through quality educational programs and constant support.",
+          mission: "Our Mission",
+          missionText: "We create equal opportunities for all children through quality education, mentoring and emotional support.",
+          vision: "Our Vision",
+          visionText: "A Romania where every child has access to quality education and equal chances of success."
+        },
+        board: {
+          title: "Our Team",
+          subtitle: "Board Members",
+          position: "Position"
+        },
+        volunteer: {
+          title: "Become a Volunteer",
+          subtitle: "Join our team and make a difference!",
+          formTitle: "Registration Form",
+          firstName: "First Name",
+          lastName: "Last Name",
+          email: "Email",
+          phone: "Phone",
+          age: "Age",
+          message: "Message (optional)",
+          messagePlaceholder: "Tell us why you want to become a volunteer...",
+          submit: "Submit Application",
+          success: "Thank you! Your application has been submitted successfully!",
+          error: "An error occurred. Please try again."
+        }
+      },
+      // Articles Page
+      articles: {
+        title: "Articles and News",
+        subtitle: "Latest news and stories from Access to Success",
+        readMore: "Read More",
+        noArticles: "No articles available at the moment."
+      },
+      // Projects Pages
+      projects: {
+        upcoming: {
+          title: "Upcoming Projects",
+          subtitle: "Our ongoing and planned projects",
+          noProjects: "No upcoming projects at the moment."
+        },
+        completed: {
+          title: "Completed Projects",
+          subtitle: "Projects we have successfully completed",
+          noProjects: "No completed projects at the moment."
+        }
+      },
+      // Achievements Page
+      achievements: {
+        title: "Achievements",
+        comingSoon: "Coming Soon...",
+        description: "We're preparing something wonderful! Come back soon to see our achievements."
+      },
+      // Donate Page
+      donate: {
+        title: "Support Our Cause",
+        subtitle: "Your donation makes a difference in children's lives",
+        comingSoon: "The donation system will be available soon!",
+        description: "We're working on implementing a secure online donation system. Soon you'll be able to support our cause directly from the website.",
+        alternative: "Alternative Donation Methods",
+        bank: "Bank Transfer",
+        contact: "For information about donations, contact us at:",
+        email: "contact@accesstosuccess.ro"
+      },
+      // Common
+      common: {
+        loading: "Loading...",
+        error: "Error",
+        tryAgain: "Try Again",
+        close: "Close",
+        learnMore: "Learn More"
+      }
+    }
+  }
+};
+
+i18n
+  .use(initReactI18next)
+  .init({
+    resources,
+    lng: 'ro', // default language
+    fallbackLng: 'ro',
+    interpolation: {
+      escapeValue: false
+    }
+  });
+
+export default i18n;

@@ -1,5 +1,7 @@
+import { API_BASE_URL } from '../config';
+
 //URL corect pentru backend (Spring Boot)
-const BASE_URL = "http://localhost:8080/api/articles";
+const BASE_URL = `${API_BASE_URL}/articles`;
 
 //Obtine toate articolele
 export async function getArticles() {

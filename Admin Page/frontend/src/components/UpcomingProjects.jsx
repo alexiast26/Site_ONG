@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { API_BASE_URL } from '../config';
+
+const BACKEND_URL = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:8080';
 
 export default function UpcomingProjects() {
     const [projects, setProjects] = useState([]);
@@ -6,7 +9,7 @@ export default function UpcomingProjects() {
 
     // 🔹 Preluam proiectele
     useEffect(() => {
-        fetch("http://localhost:8080/api/upcoming-projects")
+        fetch(`${API_BASE_URL}/upcoming-projects`)
             .then(res => res.json())
             .then(data => setProjects(data))
             .catch(err => console.error("Eroare la preluare proiecte:", err));
@@ -24,7 +27,7 @@ export default function UpcomingProjects() {
         formData.append("description", newProject.description);
         if (newProject.image) formData.append("image", newProject.image);
 
-        const res = await fetch("http://localhost:8080/api/upcoming-projects", {
+        const res = await fetch(`${API_BASE_URL}/upcoming-projects`, {
             method: "POST",
             body: formData,
         });
@@ -38,7 +41,7 @@ export default function UpcomingProjects() {
 
     // 🔹 Stergem proiect
     const handleDeleteProject = async (id) => {
-        await fetch(`http://localhost:8080/api/upcoming-projects/${id}`, { method: "DELETE" });
+        await fetch(`${API_BASE_URL}/upcoming-projects/${id}`, { method: "DELETE" });
         setProjects(projects.filter(p => p.id !== id));
     };
 
@@ -73,7 +76,7 @@ export default function UpcomingProjects() {
                         <div key={p.id} className="project-card">
                             <h3>{p.title}</h3>
                             <p>{p.description}</p>
-                            {p.imagePath && <img src={`http://localhost:8080${p.imagePath}`} alt={p.title} />}
+                            {p.imagePath && <img src={`${BACKEND_URL}${p.imagePath}`} alt={p.title} />}
                             <button className="button-delete" onClick={() => handleDeleteProject(p.id)}>Sterge</button>
                         </div>
                     ))

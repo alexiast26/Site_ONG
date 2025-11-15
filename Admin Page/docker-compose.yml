@@ -2,7 +2,7 @@
 services:
   backend:
     build:
-      context: "./Admin Page/adminpanel"   # ghilimele pentru spațiu
+      context: ./adminpanel
     container_name: adminpage-backend
     ports:
       - "8080:8080"
@@ -13,7 +13,7 @@ services:
 
   frontend:
     build:
-      context: "./Admin Page/frontend"    # ghilimele pentru spațiu
+      context: ./frontend
     container_name: adminpage-frontend
     ports:
       - "80:80"

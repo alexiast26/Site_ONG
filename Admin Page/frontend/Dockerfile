@@ -8,7 +8,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Instalează dependențele
-RUN npm ci --silent
+RUN npm install --silent
 
 # Copiază restul aplicației
 COPY . .
