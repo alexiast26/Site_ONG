@@ -24,6 +24,7 @@
   text-decoration: none;
   display: flex;
   align-items: center;
+  gap: 0.75rem;
   transition: color 0.3s ease;
 }
 
@@ -31,11 +32,21 @@
   color: var(--primary-light);
 }
 
+.logo-image {
+  height: 50px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
 .logo-text {
   background: linear-gradient(135deg, var(--primary), var(--primary-light));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 700;
 }
 
 .navbar-menu {
@@ -195,6 +206,14 @@
 @media (max-width: 768px) {
   .navbar-container {
     padding: 1rem;
+  }
+
+  .logo-image {
+    height: 40px;
+  }
+
+  .logo-text {
+    font-size: 1rem;
   }
 
   .menu-toggle {

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import axios from 'axios';
+import ColorBends from '../components/ColorBends';
 import './HomePage.css';
 
 const API_BASE_URL = process.env.NODE_ENV === 'production'
@@ -24,25 +25,25 @@ const HomePage = () => {
   const boardMembers = [
     {
       id: 1,
-      name: 'Ana Popescu',
+      name: 'Gina Bontaș',
       position: 'Președinte',
       image: '/images/board/member1.jpg'
     },
     {
       id: 2,
-      name: 'Ion Ionescu',
+      name: 'Adrian Șorecău',
       position: 'Vicepreședinte',
       image: '/images/board/member2.jpg'
     },
     {
       id: 3,
-      name: 'Maria Dumitrescu',
+      name: 'Laura Roman',
       position: 'Secretar',
       image: '/images/board/member3.jpg'
     },
     {
       id: 4,
-      name: 'Andrei Constantin',
+      name: 'Adrian Tiniș',
       position: 'Membru',
       image: '/images/board/member4.jpg'
     }
@@ -104,6 +105,28 @@ const HomePage = () => {
     }
   };
 
+  const logoAnimation = {
+    hidden: { opacity: 0, scale: 0.5, rotate: -180 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      rotate: 0,
+      transition: {
+        duration: 1,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const floatingAnimation = {
+    y: [0, -20, 0],
+    transition: {
+      duration: 3,
+      repeat: Infinity,
+      ease: "easeInOut"
+    }
+  };
+
   return (
     <div className="homepage">
       {/* Hero Section */}
@@ -113,10 +136,20 @@ const HomePage = () => {
         animate="visible"
         variants={fadeInUp}
       >
-        <div className="hero-background">
-          <div className="hero-overlay"></div>
-        </div>
+        <ColorBends />
         <div className="hero-content container">
+          <motion.div
+            className="hero-logo"
+            initial="hidden"
+            animate="visible"
+            variants={logoAnimation}
+          >
+            <motion.img
+              src="/AccesSpreSuccesLogo.jpeg"
+              alt="Acces spre Succes Logo"
+              animate={floatingAnimation}
+            />
+          </motion.div>
           <motion.h1
             className="hero-title"
             variants={fadeInUp}

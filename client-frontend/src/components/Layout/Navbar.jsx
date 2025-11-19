@@ -29,6 +29,11 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="navbar-container">
         <Link to="/" className="navbar-logo" onClick={closeMenu}>
+          <img
+            src="/AccesSpreSuccesLogo.jpeg"
+            alt="Acces spre Succes Logo"
+            className="logo-image"
+          />
           <span className="logo-text">Acces spre Succes</span>
         </Link>
 

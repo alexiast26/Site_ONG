@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import axios from 'axios';
+import Modal from '../components/Modal';
 import './ProjectsPage.css';
 
 const API_BASE_URL = process.env.NODE_ENV === 'production'
@@ -17,6 +18,8 @@ const UpcomingProjectsPage = () => {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [selectedProject, setSelectedProject] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     fetchProjects();
@@ -34,6 +37,16 @@ const UpcomingProjectsPage = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleProjectClick = (project) => {
+    setSelectedProject(project);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setTimeout(() => setSelectedProject(null), 300);
   };
 
   const fadeInUp = {
@@ -131,7 +144,10 @@ const UpcomingProjectsPage = () => {
                   <div className="project-content">
                     <h2 className="project-title">{project.title}</h2>
                     <p className="project-description">{project.description}</p>
-                    <button className="btn btn-learn-more">
+                    <button
+                      className="btn btn-learn-more"
+                      onClick={() => handleProjectClick(project)}
+                    >
                       {t('common.learnMore')}
                     </button>
                   </div>
@@ -141,6 +157,22 @@ const UpcomingProjectsPage = () => {
           )}
         </div>
       </section>
+
+      <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+        {selectedProject && (
+          <>
+            {selectedProject.imagePath && (
+              <img
+                src={`${BACKEND_URL}${selectedProject.imagePath}`}
+                alt={selectedProject.title}
+                className="modal-image"
+              />
+            )}
+            <h1 className="modal-title">{selectedProject.title}</h1>
+            <p className="modal-description">{selectedProject.description}</p>
+          </>
+        )}
+      </Modal>
     </div>
   );
 };
