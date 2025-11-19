@@ -1,0 +1,324 @@
+.donate-page {
+  min-height: 100vh;
+}
+
+.donate-header {
+  background: linear-gradient(135deg, var(--secondary-dark), var(--secondary));
+  padding: 5rem 0 3rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.donate-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%231d4771" fill-opacity="0.1"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
+  opacity: 0.3;
+}
+
+.donate-header .container {
+  position: relative;
+  z-index: 1;
+}
+
+.heart-icon {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 2rem;
+  color: var(--primary);
+  animation: heartbeat 2s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  10%, 30% {
+    transform: scale(1.1);
+  }
+  20%, 40% {
+    transform: scale(1);
+  }
+}
+
+.donate-section {
+  padding: 4rem 0;
+}
+
+.donate-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.coming-soon-card {
+  background: linear-gradient(135deg, var(--gray-50), var(--white));
+  padding: 3rem;
+  border-radius: 1.5rem;
+  text-align: center;
+  margin-bottom: 3rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  border: 2px solid var(--secondary-light);
+}
+
+.card-icon-wrapper {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 1.5rem;
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+}
+
+.card-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+.card-description {
+  font-size: 1.1rem;
+  color: var(--gray-700);
+  line-height: 1.7;
+}
+
+.donation-methods {
+  margin-bottom: 3rem;
+}
+
+.methods-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--primary);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.method-card {
+  background: var(--white);
+  padding: 2.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  border-left: 4px solid var(--secondary);
+  transition: all 0.3s ease;
+}
+
+.method-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.method-icon {
+  flex-shrink: 0;
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-dark);
+}
+
+.method-content {
+  flex: 1;
+}
+
+.method-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+}
+
+.bank-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.bank-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.bank-detail strong {
+  color: var(--gray-600);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.bank-detail span {
+  color: var(--gray-800);
+  font-size: 1.1rem;
+  font-weight: 600;
+  font-family: 'Courier New', monospace;
+}
+
+.contact-info {
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+  padding: 2.5rem;
+  border-radius: 1rem;
+  text-align: center;
+  color: var(--white);
+  margin-bottom: 3rem;
+}
+
+.info-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 1.5rem;
+  color: var(--secondary);
+}
+
+.contact-text {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  color: var(--gray-200);
+}
+
+.contact-email {
+  display: inline-block;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--secondary);
+  text-decoration: none;
+  padding: 0.75rem 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2rem;
+  transition: all 0.3s ease;
+}
+
+.contact-email:hover {
+  background: var(--secondary);
+  color: var(--primary-dark);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(235, 189, 58, 0.4);
+}
+
+.impact-section {
+  background: var(--gray-50);
+  padding: 3rem;
+  border-radius: 1rem;
+}
+
+.impact-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary);
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.impact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.impact-card {
+  background: var(--white);
+  padding: 2rem;
+  border-radius: 1rem;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+}
+
+.impact-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+}
+
+.impact-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 1rem;
+  color: var(--secondary);
+}
+
+.impact-card h4 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 0.75rem;
+}
+
+.impact-card p {
+  font-size: 1rem;
+  color: var(--gray-700);
+  line-height: 1.6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .coming-soon-card {
+    padding: 2rem;
+  }
+
+  .method-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .method-icon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .method-icon svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  .bank-detail {
+    align-items: center;
+  }
+
+  .impact-section {
+    padding: 2rem;
+  }
+
+  .impact-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-title {
+    font-size: 1.5rem;
+  }
+
+  .methods-title,
+  .impact-title {
+    font-size: 1.5rem;
+  }
+
+  .contact-info {
+    padding: 2rem 1.5rem;
+  }
+
+  .contact-email {
+    font-size: 1.1rem;
+    padding: 0.625rem 1.5rem;
+  }
+
+  .impact-section {
+    padding: 1.5rem;
+  }
+}

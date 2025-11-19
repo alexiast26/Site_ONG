@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { API_BASE_URL } from '../config';
+
+const BACKEND_URL = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:8080';
 
 export default function Articles() {
     const [articles, setArticles] = useState([]);
@@ -6,7 +9,7 @@ export default function Articles() {
 
     // Ia articolele din backend la mount
     useEffect(() => {
-        fetch("http://localhost:8080/api/articles")
+        fetch(`${API_BASE_URL}/articles`)
             .then(res => res.json())
             .then(data => setArticles(data))
             .catch(err => console.error(err));
@@ -25,7 +28,7 @@ export default function Articles() {
         if (newArticle.image) formData.append("image", newArticle.image);
 
         try {
-            const res = await fetch("http://localhost:8080/api/articles", {
+            const res = await fetch(`${API_BASE_URL}/articles`, {
                 method: "POST",
                 body: formData
             });
@@ -44,7 +47,7 @@ export default function Articles() {
     // Sterge articol
     const handleDeleteArticle = async (id) => {
         try {
-            const res = await fetch(`http://localhost:8080/api/articles/${id}`, {
+            const res = await fetch(`${API_BASE_URL}/articles/${id}`, {
                 method: "DELETE"
             });
 
@@ -90,7 +93,7 @@ export default function Articles() {
                             <p>{a.description}</p>
                             {a.imagePath && (
                                 <img
-                                    src={`http://localhost:8080${a.imagePath}`}
+                                    src={`${BACKEND_URL}${a.imagePath}`}
                                     alt={a.title}
                                     style={{ maxWidth: "200px", marginTop: "8px" }}
                                 />
