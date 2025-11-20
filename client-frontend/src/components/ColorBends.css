@@ -1,0 +1,104 @@
+.color-bends-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+  background: linear-gradient(to bottom, #f8f9fa 0%, #ffffff 100%);
+}
+
+.color-bend {
+  position: absolute;
+  border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+  filter: blur(100px);
+  opacity: 0.6;
+  animation: morph 25s ease-in-out infinite;
+  mix-blend-mode: multiply;
+}
+
+.bend-1 {
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, var(--primary-light) 0%, var(--primary) 100%);
+  top: -25%;
+  left: -15%;
+  animation-delay: 0s;
+}
+
+.bend-2 {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, var(--secondary-light) 0%, var(--secondary) 100%);
+  top: 20%;
+  right: -20%;
+  animation-delay: 7s;
+}
+
+.bend-3 {
+  width: 550px;
+  height: 550px;
+  background: radial-gradient(circle, var(--primary) 0%, var(--primary-dark) 100%);
+  bottom: -15%;
+  left: 30%;
+  animation-delay: 14s;
+}
+
+.bend-4 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, var(--secondary) 0%, var(--secondary-dark) 100%);
+  top: 60%;
+  left: 50%;
+  animation-delay: 21s;
+}
+
+@keyframes morph {
+  0%, 100% {
+    border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+    transform: translate(0, 0) rotate(0deg);
+  }
+  20% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    transform: translate(20px, -30px) rotate(72deg);
+  }
+  40% {
+    border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%;
+    transform: translate(-30px, 20px) rotate(144deg);
+  }
+  60% {
+    border-radius: 70% 30% 50% 50% / 30% 70% 40% 60%;
+    transform: translate(25px, 40px) rotate(216deg);
+  }
+  80% {
+    border-radius: 30% 70% 60% 40% / 50% 40% 60% 50%;
+    transform: translate(-20px, -25px) rotate(288deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .color-bend {
+    filter: blur(60px);
+  }
+
+  .bend-1 {
+    width: 400px;
+    height: 400px;
+  }
+
+  .bend-2 {
+    width: 350px;
+    height: 350px;
+  }
+
+  .bend-3 {
+    width: 300px;
+    height: 300px;
+  }
+
+  .bend-4 {
+    width: 250px;
+    height: 250px;
+  }
+}
