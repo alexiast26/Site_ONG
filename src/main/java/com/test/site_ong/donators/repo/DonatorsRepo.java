@@ -10,11 +10,8 @@ import java.util.List;
 
 @Repository
 public interface DonatorsRepo extends JpaRepository<Donators, Integer> {
-
-    //find donator based on id
-    Donators findById(int id);
-
     //find donators based on submit date
     List<Donators> findBySubmitDate(LocalDateTime startDate, LocalDateTime endDate);
 
+    Donators findByPaymentIntentId(String paymentIntentId);
 }
