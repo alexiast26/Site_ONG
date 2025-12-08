@@ -24,8 +24,7 @@ public class Volunteer {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    //to be discussed on the exact minimum and maximum age, 14 and 110 are just placeholders for now
-    @NotBlank(message = "Age is required")
+    @NotNull(message = "Age is required")
     @Min(value = 14, message = "Volunteer must be at least 14 years old")
     @Max(value = 110, message = "Invalid age, please enter a valid one")
     @Column(name = "age", nullable = false)
@@ -41,9 +40,8 @@ public class Volunteer {
     @Column(name = "phoneNumber", nullable = false, unique = true)
     private String phoneNumber;
 
-    @NotBlank(message = "Description is required")
     @Size(max = 400)
-    @Column(name = "description", nullable = false)
+    @Column(name = "description")
     private String description;
 
 

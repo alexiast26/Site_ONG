@@ -14,6 +14,7 @@ import java.util.Optional;
 @RestController
 //base URL for all methods in the controller
 @RequestMapping("/api/volunteers")
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 public class VolunteerController {
     //dependency injection (we inject the service)
