@@ -10,6 +10,8 @@ import AchievementsPage from './pages/AchievementsPage';
 import DonatePage from './pages/DonatePage';
 import './styles/GlobalStyles.css';
 import './i18n';
+import CheckoutPage from "./pages/CheckoutPage";
+import ReturnPage from "./pages/ReturnPage";
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
             <Route path="/completed-projects" element={<CompletedProjectsPage />} />
             <Route path="/achievements" element={<AchievementsPage />} />
             <Route path="/donate" element={<DonatePage />} />
+            <Route path="/checkout" element={<CheckoutPage />} />
+            <Route path="/return" element={<ReturnPage />} />
           </Routes>
         </main>
         <Footer />

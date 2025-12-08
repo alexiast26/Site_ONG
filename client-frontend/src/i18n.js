@@ -84,6 +84,7 @@ const resources = {
         title: "Susține Cauza Noastră",
         subtitle: "Donația ta face diferența în viața copiilor",
         comingSoon: "Sistemul de donații va fi disponibil în curând!",
+        resolved: "Doneaza...te rog",
         description: "Lucrăm la implementarea unui sistem sigur de donații online. În curând vei putea susține cauza noastră direct de pe site.",
         alternative: "Alternative de Donație",
         bank: "Transfer Bancar",

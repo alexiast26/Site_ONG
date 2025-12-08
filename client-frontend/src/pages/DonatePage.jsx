@@ -1,7 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import './DonatePage.css';
+
+
+const API_BASE_URL = process.env.NODE_ENV === 'production'
+    ? '/api'
+    : 'http://localhost:8080/api';
 
 const DonatePage = () => {
   const { t } = useTranslation();
@@ -24,6 +30,105 @@ const DonatePage = () => {
       }
     }
   };
+
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    amount: ''
+  });
+
+  const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [customAmount, setCustomAmount] = useState('');
+  const presetAmounts = [10, 25, 50, 100];
+  const navigate = useNavigate();
+
+  const handleInputChange = (e) => {
+    const {name, value, type, checked} = e.target;
+    setFormData({...formData, [name]: value});
+  };
+
+  const handleAmountSelect = (amount) => {
+    setFormData(prev => ({ ...prev, amount: amount.toString()}));
+    setCustomAmount('');
+  };
+
+  const handleCustomAmountSelect = (e) => {
+    const value = e.target.value;
+    setCustomAmount(value);
+    setFormData(prev => ({...prev, amount: value}));
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+    if (!formData.amount || parseFloat(formData.amount) < 1) {
+      newErrors.amount = 'Please select or enter a donation amount';
+    }
+
+    if(!formData.email.trim()) {
+      newErrors.email = 'Email is required';
+    }else if(!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email address';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  }
+
+  const processDonation = async (e) => {
+    e.preventDefault();
+
+    if (!validateForm()) {
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const donationData = {
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        amount: formData.amount,
+      };
+
+      const saveResponse = await fetch(`${API_BASE_URL}/donators/add-donor`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(donationData),
+      });
+
+      if (!saveResponse.ok) {
+        let errorMessage = `HTTP error! status: ${saveResponse.status}`;
+        try {
+          const errorData = await saveResponse.json();
+          errorMessage = errorData.message || errorMessage;
+        } catch (parseError) {
+          const errorText = await saveResponse.text();
+          errorMessage = errorText || errorMessage;
+        }
+        throw new Error(errorMessage);
+      }
+
+      const saveDonor = await saveResponse.json();
+
+      navigate('/checkout', {
+        state: {
+          donorData: donationData,
+          donorId: saveDonor.id,
+        }
+      });
+
+      }catch(err) {
+      console.error("Error: ", err);
+      setErrors({submit: err.message });
+    }finally {
+      setLoading(false);
+    }
+  };
+
+
 
   return (
     <div className="donate-page">
@@ -59,26 +164,109 @@ const DonatePage = () => {
             viewport={{ once: true, amount: 0.3 }}
             variants={staggerContainer}
           >
-            <motion.div className="coming-soon-card" variants={fadeInUp}>
-              <div className="card-icon-wrapper">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="64"
-                  height="64"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <polyline points="12 6 12 12 16 14"></polyline>
-                </svg>
-              </div>
-              <h2 className="card-title">{t('donate.comingSoon')}</h2>
+            <motion.div className="donation_form_card" variants={fadeInUp}>
+              {/*<div className="card-icon-wrapper">*/}
+              {/*  <svg*/}
+              {/*    xmlns="http://www.w3.org/2000/svg"*/}
+              {/*    width="64"*/}
+              {/*    height="64"*/}
+              {/*    viewBox="0 0 24 24"*/}
+              {/*    fill="none"*/}
+              {/*    stroke="currentColor"*/}
+              {/*    strokeWidth="2"*/}
+              {/*    strokeLinecap="round"*/}
+              {/*    strokeLinejoin="round"*/}
+              {/*  >*/}
+              {/*    <circle cx="12" cy="12" r="10"></circle>*/}
+              {/*    <polyline points="12 6 12 12 16 14"></polyline>*/}
+              {/*  </svg>*/}
+              {/*</div>*/}
+              <h2 className="card-title">{t('donate.resolved')}</h2>
               <p className="card-description">{t('donate.description')}</p>
+
+              {errors.submit && (
+                  <div className="error-message">
+                    {errors.submit}
+                  </div>
+              )}
+
+              {/*Amount Selection*/}
+              <form onSubmit={processDonation} className="donate-form">
+                <div className="form-group">
+                    <label> Select Amount *</label>
+                  <div className="amount-buttons">
+                    {presetAmounts.map(amount => (
+                        <button
+                          key={amount}
+                          type="button"
+                          className={`amount-btn ${formData.amount === amount.toString() ? 'active' : ''}`}
+                          onClick={() => handleAmountSelect(amount)}
+                        >
+                          <span className="amount-value">{amount}</span>
+                          <span className="amount-currency">RON</span>
+                        </button>
+                    ))}
+                  </div>
+                  <div className="custom-amount-container">
+                    <input
+                        type="number"
+                        className="custom-amount"
+                        placeholder="Alta suma"
+                        value={customAmount}
+                        onChange={handleCustomAmountSelect}
+                        min="1"
+                        step="0.01"
+                    />
+                    <span className="currency-symbol">RON</span>
+                </div>
+                  {errors.amount && <span className="error-message">{errors.amount}</span>}
+                </div>
+
+                {/*Donor information*/}
+                <div className="name-fields">
+                  <div className="form-group">
+                    <label htmlFor="firstName">First Name *</label>
+                    <input
+                      type="text"
+                      id="firstName"
+                      name="firstName"
+                      value={formData.firstName}
+                      onChange={handleInputChange}
+                      />
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="lastName">Last Name *</label>
+                      <input
+                        type="text"
+                        id="lastName"
+                        name="lastName"
+                        value={formData.lastName}
+                        onChange={handleInputChange}
+                      />
+                  </div>
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="email">Email *</label>
+                  <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  className={errors.email ? 'error' : ''}/>
+                  {errors.email && <span className="error-message">{errors.email}</span>}
+                </div>
+
+                {/*Submit button*/}
+                <button type="submit" className="submit-btn" disabled={loading}>
+                  {loading ? 'Processing...' : 'Submit'}
+                </button>
+              </form>
             </motion.div>
+
+
 
             <motion.div className="donation-methods" variants={fadeInUp}>
               <h3 className="methods-title">{t('donate.alternative')}</h3>
