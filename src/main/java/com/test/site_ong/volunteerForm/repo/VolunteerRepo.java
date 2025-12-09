@@ -7,9 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface VolunteerRepo extends JpaRepository<Volunteer, Integer> {
 
-    //find volunteer based on id
-    Volunteer findById(int id);
-
     //find volunteer by email
     Volunteer findByEmail(String email);
 
