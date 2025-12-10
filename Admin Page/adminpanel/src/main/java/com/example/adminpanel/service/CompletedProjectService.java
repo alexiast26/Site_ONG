@@ -5,19 +5,27 @@ import com.example.adminpanel.repository.CompletedProjectRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 @Service
 public class CompletedProjectService {
     private final CompletedProjectRepository repository;
-    private final String uploadDir = "uploads";
+    private final Path uploadPath;
 
     public CompletedProjectService(CompletedProjectRepository repository) {
         this.repository = repository;
-        File dir = new File(uploadDir);
-        if (!dir.exists()) dir.mkdirs();
+        this.uploadPath = Paths.get("uploads").toAbsolutePath().normalize();
+
+        try {
+            Files.createDirectories(this.uploadPath);
+        } catch (IOException e) {
+            throw new RuntimeException("Nu se poate crea directorul pentru upload!", e);
+        }
     }
 
     public List<CompletedProject> getAll() {
@@ -31,8 +39,8 @@ public class CompletedProjectService {
 
         if (image != null && !image.isEmpty()) {
             String fileName = System.currentTimeMillis() + "_" + image.getOriginalFilename();
-            File dest = new File(uploadDir + "/" + fileName);
-            image.transferTo(dest);
+            Path targetLocation = uploadPath.resolve(fileName);
+            Files.copy(image.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
             project.setImagePath("/uploads/" + fileName);
         }
 
