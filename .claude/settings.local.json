@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node:*)",
+      "Bash(java:*)",
+      "Bash(./mvnw spring-boot:run:*)",
+      "Bash(npm start)",
+      "Bash(git rm:*)",
+      "Bash(docker-compose up:*)",
+      "Bash(docker:*)",
+      "Bash(curl:*)",
+      "Bash(git add:*)",
+      "Bash(npx create-react-app client-frontend)",
+      "Bash(npm install:*)",
+      "Bash(PORT=3001 npm start)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

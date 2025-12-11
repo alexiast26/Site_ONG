@@ -1,0 +1,15 @@
+{
+  "name": "site-ong",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start:admin": "cd \"Admin Page/frontend\" && npm start",
+    "start:client": "cd client-frontend && npm start",
+    "install:admin": "cd \"Admin Page/frontend\" && npm install",
+    "install:client": "cd client-frontend && npm install",
+    "install:all": "npm run install:admin && npm run install:client"
+  },
+  "dependencies": {
+    "@stripe/stripe-js": "^8.5.3"
+  }
+}
