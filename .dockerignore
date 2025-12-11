@@ -1,0 +1,46 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# IDE
+.idea
+.vscode
+*.iml
+*.ipr
+*.iws
+
+# Build outputs
+target/
+*.jar
+*.war
+*.ear
+
+# Node modules
+**/node_modules/
+**/build/
+**/dist/
+
+# Docker
+docker-compose.yml
+Dockerfile*
+*.dockerfile
+
+# Documentation
+*.md
+*.txt
+.claude/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.local
+
+# Uploads (will be mounted as volume)
+uploads/
