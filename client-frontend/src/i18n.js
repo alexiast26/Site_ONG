@@ -97,7 +97,10 @@ const resources = {
         error: "Eroare",
         tryAgain: "Încearcă din nou",
         close: "Închide",
-        learnMore: "Află Mai Multe"
+        learnMore: "Află Mai Multe",
+        back: "Înapoi la Listă",
+        support: "Susține Proiectul",
+        viewMore: "Vezi Mai Multe"
       }
     }
   },
@@ -195,7 +198,10 @@ const resources = {
         error: "Error",
         tryAgain: "Try Again",
         close: "Close",
-        learnMore: "Learn More"
+        learnMore: "Learn More",
+        back: "Back to List",
+        support: "Support This Project",
+        viewMore: "View More"
       }
     }
   }

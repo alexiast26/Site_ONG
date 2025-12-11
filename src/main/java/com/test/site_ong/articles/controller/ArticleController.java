@@ -11,8 +11,6 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/articles")
-@CrossOrigin(origins = "*")
-
 public class ArticleController {
     private final ArticleService articleService;
     public ArticleController(ArticleService articleService) {
@@ -22,6 +20,15 @@ public class ArticleController {
     @GetMapping
     public List<Article> getAllArticles(){
         return articleService.getAll();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Article> getArticleById(@PathVariable Long id){
+        Article article = articleService.getById(id);
+        if(article != null){
+            return ResponseEntity.ok(article);
+        }
+        return ResponseEntity.notFound().build();
     }
 
     @PostMapping

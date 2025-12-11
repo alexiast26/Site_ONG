@@ -11,7 +11,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/completed-projects")
-@CrossOrigin(origins = "*")
 public class CompletedProjectController {
 
     private final CompletedProjectService projectService;

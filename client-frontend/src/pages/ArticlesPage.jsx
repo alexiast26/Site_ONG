@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import axios from 'axios';
-import Modal from '../components/Modal';
 import './ArticlesPage.css';
 
 const API_BASE_URL = process.env.NODE_ENV === 'production'
@@ -14,12 +14,11 @@ const BACKEND_URL = process.env.NODE_ENV === 'production'
   : 'http://localhost:8080';
 
 const ArticlesPage = () => {
+  const navigate = useNavigate();
   const { t } = useTranslation();
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [selectedArticle, setSelectedArticle] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     fetchArticles();
@@ -39,14 +38,8 @@ const ArticlesPage = () => {
     }
   };
 
-  const handleArticleClick = (article) => {
-    setSelectedArticle(article);
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-    setTimeout(() => setSelectedArticle(null), 300);
+  const handleArticleClick = (articleId) => {
+    navigate(`/articles/${articleId}`);
   };
 
   const fadeInUp = {
@@ -143,7 +136,7 @@ const ArticlesPage = () => {
                     <p className="article-description">{article.description}</p>
                     <button
                       className="btn btn-read-more"
-                      onClick={() => handleArticleClick(article)}
+                      onClick={() => handleArticleClick(article.id)}
                     >
                       {t('articles.readMore')}
                     </button>
@@ -154,22 +147,6 @@ const ArticlesPage = () => {
           )}
         </div>
       </section>
-
-      <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
-        {selectedArticle && (
-          <>
-            {selectedArticle.imagePath && (
-              <img
-                src={`${BACKEND_URL}${selectedArticle.imagePath}`}
-                alt={selectedArticle.title}
-                className="modal-image"
-              />
-            )}
-            <h1 className="modal-title">{selectedArticle.title}</h1>
-            <p className="modal-description">{selectedArticle.description}</p>
-          </>
-        )}
-      </Modal>
     </div>
   );
 };

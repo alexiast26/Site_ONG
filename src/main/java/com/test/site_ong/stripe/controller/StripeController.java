@@ -11,7 +11,6 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/stripe")
-@CrossOrigin(origins = "http://localhost:3000")
 @RequiredArgsConstructor
 public class StripeController {
     private final StripeService stripeService;

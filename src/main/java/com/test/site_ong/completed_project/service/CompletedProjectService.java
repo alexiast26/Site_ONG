@@ -24,6 +24,10 @@ public class CompletedProjectService {
         return repository.findAll();
     }
 
+    public CompletedProject getById(Long id) {
+        return repository.findById(id).orElse(null);
+    }
+
     public CompletedProject addProject(String title, String description, MultipartFile image) throws IOException {
         CompletedProject project = new CompletedProject();
         project.setTitle(title);

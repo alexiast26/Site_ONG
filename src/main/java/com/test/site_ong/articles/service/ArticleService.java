@@ -28,6 +28,10 @@ public class ArticleService {
         return articleRepository.findAll();
     }
 
+    public Article getById(Long id){
+        return articleRepository.findById(id).orElse(null);
+    }
+
     public Article addArticle(String title, String description, MultipartFile image) throws IOException {
         Article article = new Article();
         article.setTitle(title);

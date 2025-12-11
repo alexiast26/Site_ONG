@@ -11,7 +11,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/completed-projects")
-@CrossOrigin(origins = "*")
 public class CompletedProjectController {
 
     private final CompletedProjectService projectService;
@@ -23,6 +22,15 @@ public class CompletedProjectController {
     @GetMapping
     public List<CompletedProject> getAll() {
         return projectService.getAll();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<CompletedProject> getProjectById(@PathVariable Long id) {
+        CompletedProject project = projectService.getById(id);
+        if (project != null) {
+            return ResponseEntity.ok(project);
+        }
+        return ResponseEntity.notFound().build();
     }
 
     @PostMapping

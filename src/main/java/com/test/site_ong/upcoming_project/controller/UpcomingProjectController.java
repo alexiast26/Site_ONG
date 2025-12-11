@@ -11,7 +11,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/upcoming-projects")
-@CrossOrigin(origins = "*")
 public class UpcomingProjectController {
     private final UpcomingProjectService service;
 
@@ -22,6 +21,15 @@ public class UpcomingProjectController {
     @GetMapping
     public List<UpcomingProject> getAllProjects() {
         return service.getAll();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<UpcomingProject> getProjectById(@PathVariable Long id) {
+        UpcomingProject project = service.getById(id);
+        if (project != null) {
+            return ResponseEntity.ok(project);
+        }
+        return ResponseEntity.notFound().build();
     }
 
     @PostMapping

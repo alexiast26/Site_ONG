@@ -17,6 +17,10 @@ public class VolunteerService {
         return volunteerRepository.findAll();
     }
 
+    public Volunteer createVolunteer(Volunteer volunteer) {
+        return volunteerRepository.save(volunteer);
+    }
+
     public void deleteVolunteer(Long id) {
         volunteerRepository.deleteById(id);
     }

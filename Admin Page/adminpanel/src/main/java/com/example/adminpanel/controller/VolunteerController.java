@@ -7,7 +7,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/volunteers")
-@CrossOrigin(origins = "*")
 public class VolunteerController {
     private final VolunteerService volunteerService;
 
@@ -18,6 +17,11 @@ public class VolunteerController {
     @GetMapping
     public List<Volunteer> getAllVolunteers() {
         return volunteerService.getAll();
+    }
+
+    @PostMapping
+    public Volunteer createVolunteer(@RequestBody Volunteer volunteer) {
+        return volunteerService.createVolunteer(volunteer);
     }
 
     @DeleteMapping("/{id}")
