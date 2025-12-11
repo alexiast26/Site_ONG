@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import axios from 'axios';
-import Modal from '../components/Modal';
 import './ProjectsPage.css';
 
 const API_BASE_URL = process.env.NODE_ENV === 'production'
@@ -14,12 +14,11 @@ const BACKEND_URL = process.env.NODE_ENV === 'production'
   : 'http://localhost:8080';
 
 const CompletedProjectsPage = () => {
+  const navigate = useNavigate();
   const { t } = useTranslation();
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [selectedProject, setSelectedProject] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     fetchProjects();
@@ -39,14 +38,8 @@ const CompletedProjectsPage = () => {
     }
   };
 
-  const handleProjectClick = (project) => {
-    setSelectedProject(project);
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-    setTimeout(() => setSelectedProject(null), 300);
+  const handleProjectClick = (projectId) => {
+    navigate(`/completed-projects/${projectId}`);
   };
 
   const fadeInUp = {
@@ -146,7 +139,7 @@ const CompletedProjectsPage = () => {
                     <p className="project-description">{project.description}</p>
                     <button
                       className="btn btn-learn-more"
-                      onClick={() => handleProjectClick(project)}
+                      onClick={() => handleProjectClick(project.id)}
                     >
                       {t('common.learnMore')}
                     </button>
@@ -157,22 +150,6 @@ const CompletedProjectsPage = () => {
           )}
         </div>
       </section>
-
-      <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
-        {selectedProject && (
-          <>
-            {selectedProject.imagePath && (
-              <img
-                src={`${BACKEND_URL}${selectedProject.imagePath}`}
-                alt={selectedProject.title}
-                className="modal-image"
-              />
-            )}
-            <h1 className="modal-title">{selectedProject.title}</h1>
-            <p className="modal-description">{selectedProject.description}</p>
-          </>
-        )}
-      </Modal>
     </div>
   );
 };

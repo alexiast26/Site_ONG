@@ -11,8 +11,6 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/articles")
-@CrossOrigin(origins = "*")
-
 public class ArticleController {
     private final ArticleService articleService;
     public ArticleController(ArticleService articleService) {

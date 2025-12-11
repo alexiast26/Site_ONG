@@ -4,8 +4,10 @@ import Navbar from './components/Layout/Navbar';
 import Footer from './components/Layout/Footer';
 import HomePage from './pages/HomePage';
 import ArticlesPage from './pages/ArticlesPage';
+import ArticleDetailPage from './pages/ArticleDetailPage';
 import UpcomingProjectsPage from './pages/UpcomingProjectsPage';
 import CompletedProjectsPage from './pages/CompletedProjectsPage';
+import ProjectDetailPage from './pages/ProjectDetailPage';
 import AchievementsPage from './pages/AchievementsPage';
 import DonatePage from './pages/DonatePage';
 import './styles/GlobalStyles.css';
@@ -22,8 +24,11 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/articles" element={<ArticlesPage />} />
+            <Route path="/articles/:id" element={<ArticleDetailPage />} />
             <Route path="/upcoming-projects" element={<UpcomingProjectsPage />} />
+            <Route path="/upcoming-projects/:id" element={<ProjectDetailPage />} />
             <Route path="/completed-projects" element={<CompletedProjectsPage />} />
+            <Route path="/completed-projects/:id" element={<ProjectDetailPage />} />
             <Route path="/achievements" element={<AchievementsPage />} />
             <Route path="/donate" element={<DonatePage />} />
             <Route path="/checkout" element={<CheckoutPage />} />

@@ -24,6 +24,10 @@ public class UpcomingProjectService {
         return repository.findAll();
     }
 
+    public UpcomingProject getById(Long id) {
+        return repository.findById(id).orElse(null);
+    }
+
     public UpcomingProject addProject(String title, String description, MultipartFile image) throws IOException {
         UpcomingProject project = new UpcomingProject();
         project.setTitle(title);
